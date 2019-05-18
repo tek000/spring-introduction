@@ -17,7 +17,7 @@ public class CreditCardBillingService implements BillingService {
             ChargeResult result = processor.charge(creditCard, order.getAmount());
             transactionLog.logChargeResult(result);
 
-            return result.wasSuccessful()
+            return result.isSuccessful()
                     ? Receipt.forSuccessfulCharge(order.getAmount())
                     : Receipt.forDeclinedCharge(result.getDeclineMessage());
         } catch (UnreachableException e) {
